@@ -1,7 +1,12 @@
+const CursosController = require('../controllers/CursosControllers')
 const router = require('express').Router()
 
-router.get("/", (req, res)=>{
-    res.send("lista de cursos")
+router.get("/", async(req, res)=>{
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200)
+    const cursos = await CursosController.getAll()
+
+    res.send(JSON.stringify(cursos))
 })
 
 router.get("/:id", (req, res)=>{

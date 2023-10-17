@@ -2,17 +2,18 @@ const router = require('express').Router()
 const { raw } = require('express');
 const ProfessoresController = require('../controllers/ProfessoresController')
 
-router.get("/", (req, res)=>{
+router.get("/", async (req, res)=>{
     res.setHeader('Content-Type', 'application/json');
     res.status(200)
-    const professores = ProfessoresController.getAll()
+    const professores = await ProfessoresController.getAll()
+    console.log(professores)
     res.end(JSON.stringify(professores))
 })
 
-router.get("/:id", (req, res)=>{
+router.get("/:id", async (req, res)=>{
     res.setHeader('Content-Type', 'application/json');
     res.status(200)
-    const professor = ProfessoresController.getById(req.params.id)
+    const professor = await ProfessoresController.getById(req.params.id)
     res.end(JSON.stringify(professor))
 })
 

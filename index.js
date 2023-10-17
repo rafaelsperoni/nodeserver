@@ -1,3 +1,4 @@
+require('dotenv').config
 const express = require('express')
 const app = express()
 
@@ -8,6 +9,6 @@ app.use(express.static('public'))
 
 app.use('/api', require('./routes'))
 
-const server = app.listen(8081, ()=>{
-    console.log('Rodando na porta 8081')
+const server = app.listen(process.env.PORT, ()=>{
+    console.log('Rodando na porta '+process.env.PORT)
 })

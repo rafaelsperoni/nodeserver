@@ -1,5 +1,9 @@
+require('dotenv').config
+const db = require('../config/db')
+
 class ProfessoresController{
     getAll(){
+
         const professores =  [
             {id: 1, nome: "Rafael Speroni", email: "rafael...@ifc.edu.br"},
             {id: 2, nome: "Daniel Anderle", email: "daniel...@ifc.edu.br"}
