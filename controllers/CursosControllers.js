@@ -11,5 +11,4 @@ class CursosController{
 
     //demais metodos
 }
-
 module.exports = new CursosController()

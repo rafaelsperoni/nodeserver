@@ -6,7 +6,6 @@ router.get("/", async (req, res)=>{
     res.setHeader('Content-Type', 'application/json');
     res.status(200)
     const professores = await ProfessoresController.getAll()
-    console.log(professores)
     res.end(JSON.stringify(professores))
 })
 
