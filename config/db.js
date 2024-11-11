@@ -8,7 +8,9 @@ const pool = new Pool({
 })
 pool.on('connect', ()=>{
     console.log('DB connected')
-
+})
+pool.on('error', (err) =>{
+    console.error(err)
 })
 
 
