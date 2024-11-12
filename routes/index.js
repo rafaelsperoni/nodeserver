@@ -10,7 +10,10 @@ router.post("/login", async (req, res)=>{
 })
 
 router.post("/registro", async(req, res)=>{
-    console.log(req.body)
+    /*
+        #swagger.ignore = true
+    */
+    console.log('body '+req.body)
     const user = {
         nome: req.body.nome, 
         email: req.body.email,

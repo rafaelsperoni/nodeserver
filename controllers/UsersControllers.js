@@ -1,8 +1,9 @@
 require('dotenv').config
 const res = require('express/lib/response');
-const { JsonWebTokenError } = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const db = require('../config/db')
-const crypto = require('crypto')
+const crypto = require('crypto');
+const { escape } = require('querystring');
 
 
 class UsersController{
@@ -18,9 +19,9 @@ class UsersController{
                     status: "success",
                     message: "Login successful",
                     data: {
-                        accessToken: await JsonWebTokenError.generateToken({
+                        accessToken: await jwt.sign({
                             userId: id
-                        }),
+                        }, process.env.SECRET, {expiresIn: 60*60}),
                         id: id,
                         nome : nome,
                         email: email
@@ -39,20 +40,17 @@ class UsersController{
     //demais metodos
     async register(usuario){
         console.log(usuario)
-        nome = usuario.nome
-        email = usuario.email
-        senha = usuario.senha
-        let hashedPassword = crypto.createHash('md5').update(senha).digest('hex')
-        const res = await db.query('INSERT INTO usuario (nome, email, senha) values $1, $2, $3 returning id', [
-            nome, 
-            email,
-            hashedPassword
-        ])
+       
+        let hashedPassword = crypto.createHash('md5').update(usuario.senha).digest('hex')
+        const text = 'INSERT INTO usuario (nome, email, senha) values ($1, $2, $3) returning id'
+        const values = [usuario.nome, usuario.email, hashedPassword]
+
+        const res = await db.query(text, values)
         .then(async ()=>{
-            const userId = await(await db.query(`SELECT id from usuario where email = $1`, [email])).rows[0]
-            const token = await jwt.generateToken({
+            const userId = await(await db.query(`SELECT id from usuario where email = $1`, [usuario.email])).rows[0]
+            const token = await jwt.sign({
                 id: userId.id
-            })
+            }, process.env.SECRET, {expiresIn: 60*60})
             return {
                 status: "success",
                 message: "Registro feito com sucesso",
