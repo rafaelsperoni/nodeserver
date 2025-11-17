@@ -8,22 +8,22 @@ const doc = {
     },
     servers: [
         {
-            url: 'http://localhost:3000/api'
+            url: 'http://localhost:3001/api'
         }
     ],
     components: {
         schemas: {
             professor: {
-                id: 01,
+                id: 1,
                 nome: "Rafael",
                 email: "rafael.speroni@...br"
             },
             curso: {
-                id: 01,
+                id: 1,
                 nome: "Tecnologia em Sistemas para Internet",
                 sigla: "TSI",
                 descricao: "...",
-                coordenador: 01
+                coordenador: 1
             },
         }
     }

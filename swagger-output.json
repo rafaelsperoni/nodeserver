@@ -7,13 +7,17 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000/api"
+      "url": "http://localhost:3001/api"
     }
   ],
   "paths": {
     "/login": {
       "post": {
-        "description": "",
+        "tags": [
+          "Autenticação"
+        ],
+        "summary": "Login",
+        "description": "Este endpoint faz o login",
         "responses": {
           "200": {
             "description": "OK"
@@ -25,36 +29,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "email": {
-                    "example": "any"
-                  },
-                  "senha": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/registro": {
-      "post": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "nome": {
-                    "example": "any"
-                  },
                   "email": {
                     "example": "any"
                   },
@@ -91,10 +65,14 @@
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Cursos"
+        ],
+        "summary": "Insere um curso",
+        "description": "Este endpoint insere um novo curso",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
           }
         },
         "requestBody": {
@@ -111,7 +89,11 @@
     },
     "/cursos/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Cursos"
+        ],
+        "summary": "Retorna um curso pelo id",
+        "description": "Este endpoint retorna um curso, dado um id",
         "parameters": [
           {
             "name": "id",
@@ -124,12 +106,23 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Dados do curso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/curso"
+                }
+              }
+            }
           }
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Cursos"
+        ],
+        "summary": "Altera os dados de um curso",
+        "description": "Este endpoint altera os dados de um curso",
         "parameters": [
           {
             "name": "id",
@@ -147,7 +140,11 @@
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Cursos"
+        ],
+        "summary": "Exclui um curso",
+        "description": "Este endpoint excluir um curso",
         "parameters": [
           {
             "name": "id",
@@ -167,7 +164,11 @@
     },
     "/disciplinas/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Disciplinas"
+        ],
+        "summary": "Retorna a lista das disciplinas",
+        "description": "Este endpoint retorna uma lista das discipinas",
         "responses": {
           "200": {
             "description": "OK"
@@ -175,7 +176,11 @@
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Disciplinas"
+        ],
+        "summary": "Insere disciplina",
+        "description": "Este endpoint insere uma nova disciplina",
         "responses": {
           "200": {
             "description": "OK"
@@ -185,7 +190,11 @@
     },
     "/disciplinas/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Disciplinas"
+        ],
+        "summary": "Retorna os dados de uma disciplina",
+        "description": "Este endpoint retorna os dados de uma disciplina, dado o seu id",
         "parameters": [
           {
             "name": "id",
@@ -203,7 +212,11 @@
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Disciplinas"
+        ],
+        "summary": "Altera os dados disciplina",
+        "description": "Este endpoint altera os dados de uma disciplina",
         "parameters": [
           {
             "name": "id",
@@ -221,7 +234,11 @@
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Disciplinas"
+        ],
+        "summary": "Exclui disciplina",
+        "description": "Este endpoint exclui uma disciplina",
         "parameters": [
           {
             "name": "id",
@@ -241,7 +258,11 @@
     },
     "/professores/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Professores"
+        ],
+        "summary": "Retorna a lista dos professores",
+        "description": "Este endpoint retorna uma lista dos professores",
         "responses": {
           "200": {
             "description": "OK"
@@ -249,10 +270,11 @@
         }
       },
       "post": {
-        "description": "",
-        "produces": [
-          "application/json"
+        "tags": [
+          "Professores"
         ],
+        "summary": "Insere professor",
+        "description": "Este endpoint insere um professor",
         "responses": {
           "201": {
             "description": "Created"
@@ -262,7 +284,11 @@
     },
     "/professores/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Professores"
+        ],
+        "summary": "Retorna um professor pelo id",
+        "description": "Este endpoint retorna os dados de um professor, dado o seu id",
         "parameters": [
           {
             "name": "id",
@@ -280,7 +306,11 @@
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Professores"
+        ],
+        "summary": "Altera os dados de um professor",
+        "description": "Este endpoint altera os dados de um professor",
         "parameters": [
           {
             "name": "id",
@@ -298,7 +328,14 @@
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Professores"
+        ],
+        "summary": "Exclui um professor",
+        "description": "Este endpoint exclui um professor",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -310,6 +347,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "204": {
             "description": "No Content"
           }

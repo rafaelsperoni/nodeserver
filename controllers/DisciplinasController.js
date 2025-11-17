@@ -1,23 +1,23 @@
 require('dotenv').config
 const db = require('../config/db')
 
-class ProfessoresController{
+class DisciplinasController{
     async getAll(){
-        const professores = await db.query('SELECT * FROM professor')
+        const disciplinas = await db.query('SELECT * FROM disciplina')
 
-        return professores.rows
+        return disciplinas.rows
     }
 
     async getById(id){
         
-        const professor = await db.query('SELECT * FROM professor WHERE id=$1', [id])
+        const disciplina = await db.query('SELECT * FROM disciplina WHERE id=$1', [id])
         
-        return professor.rows
+        return disciplina.rows[0]
     }
 
-    async insert(professor){
+    async insert(disciplina){
          //insert into database
-         const text = 'INSERT INTO professor (nome, email) values ($1, $2) returning id'
+         const text = 'INSERT INTO disciplina (nome, email) values ($1, $2) returning id'
          const values = [professor.nome, professor.email]
  
          const res = await db.query(text, values)
@@ -27,20 +27,20 @@ class ProfessoresController{
          }
     }
 
-    update(professor){
+    update(disciplina){
         return "/api/professores/1"
 
     }
 
     async delete(id){
         //insert into database
-        const text = 'DELETE FROM professor WHERE id=$1'
+        const text = 'DELETE FROM disciplina WHERE id=$1'
         const values = [id]
  
         const res = await db.query(text, values)
-        return {message: "Professor excluído com sucesso"}
+        return {message: "Disciplina excluído com sucesso"}
 
     }
 }
 
-module.exports = new ProfessoresController()
+module.exports = new DisciplinasController()

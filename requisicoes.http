@@ -1,0 +1,8 @@
+###GET lista de cursos
+GET http://localhost:3001/api/cursos
+
+
+
+
+###GET lista de professores
+GET http://localhost:3001/api/professores

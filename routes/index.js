@@ -3,6 +3,11 @@ const UsersControllers = require('../controllers/UsersControllers')
 const router = require('express').Router()
 
 router.post("/login", async (req, res)=>{
+    /*
+        #swagger.tags = ['Autenticação']
+        #swagger.summary = 'Login'
+        #swagger.description = 'Este endpoint faz o login'
+    */
     const {email, senha} = req.body
     const user = await UsersControllers.login(email, senha)
         
